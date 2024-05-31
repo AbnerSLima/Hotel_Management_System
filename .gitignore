@@ -1,0 +1,12 @@
+# Ignore the __pycache__ directory
+__pycache__/
+
+# Other common Python ignores
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+venv/
