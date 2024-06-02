@@ -19,7 +19,24 @@ class SistemaGestaoHotel:
         self.gestao_estadias = GestaoEstadias(self.gestao_quartos, self.gestao_auditorios, self.gestao_refeicoes)
         self.relatorios = Relatorios(self.gestao_quartos, self.gestao_auditorios, self.gestao_estadias)
 
-    def menu(self):
+    def login(self):
+        while True:
+            print("- - - USUÁRIO - - -")
+            print("1. Gerente")
+            print("2. Operário")
+            print("3. Encerrar")
+            opcao = input("Escolha uma opção: ")
+
+            if opcao == '1':
+                self.menu1()
+            elif opcao == '2':
+                self.menu2()
+            elif opcao == '3':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+    def menu1(self):
         while True:
             limpar()
             print("- - - - MEMU - - - -")
@@ -39,6 +56,27 @@ class SistemaGestaoHotel:
             elif opcao == '4':
                 self.relatorios_menu()
             elif opcao == '5':
+                break
+            else:
+                print("Opção inválida. Tente novamente.")
+
+    def menu2(self):
+        while True:
+            limpar()
+            print("- - - - MEMU - - - -")
+            print("1. Checkin")
+            print("2. Checkout")
+            print("3. Relatórios")
+            print("4. Encerrar")
+            opcao = input("Escolha uma opção: ")
+
+            if opcao == '1':
+                self.checkin()
+            elif opcao == '2':
+                self.checkout()
+            elif opcao == '3':
+                self.relatorios_menu()
+            elif opcao == '4':
                 break
             else:
                 print("Opção inválida. Tente novamente.")
@@ -164,4 +202,4 @@ class SistemaGestaoHotel:
 
 if __name__ == "__main__":
     sistema = SistemaGestaoHotel()
-    sistema.menu()
+    sistema.login()
