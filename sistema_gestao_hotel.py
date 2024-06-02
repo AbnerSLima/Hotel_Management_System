@@ -1,4 +1,6 @@
 import os
+import sys
+
 from gestao_quartos import GestaoQuartos
 from gestao_auditorios import GestaoAuditorios
 from gestao_refeicoes import GestaoRefeicoes
@@ -21,6 +23,7 @@ class SistemaGestaoHotel:
 
     def login(self):
         while True:
+            limpar()
             print("- - - USUÁRIO - - -")
             print("1. Gerente")
             print("2. Operário")
@@ -32,7 +35,7 @@ class SistemaGestaoHotel:
             elif opcao == '2':
                 self.menu2()
             elif opcao == '3':
-                break
+                sys.exit()
             else:
                 print("Opção inválida. Tente novamente.")
 
@@ -50,13 +53,17 @@ class SistemaGestaoHotel:
             if opcao == '1':
                 self.cadastro()
             elif opcao == '2':
-                self.checkin()
+                if self.gestao_quartos.quartos:
+                    self.checkin()
+                else:
+                    print("Não há quartos cadastrados. Por favor, cadastre um quarto primeiro.")
+                    input("\nAperte Enter para retornar ao Menu Principal")
             elif opcao == '3':
                 self.checkout()
             elif opcao == '4':
                 self.relatorios_menu()
             elif opcao == '5':
-                break
+                sys.exit()
             else:
                 print("Opção inválida. Tente novamente.")
 
@@ -71,13 +78,17 @@ class SistemaGestaoHotel:
             opcao = input("Escolha uma opção: ")
 
             if opcao == '1':
-                self.checkin()
+                if self.gestao_quartos.quartos:
+                    self.checkin()
+                else:
+                    print("Não há quartos cadastrados. Por favor, cadastre um quarto primeiro.")
+                    input("\nAperte Enter para retornar ao Menu Principal")
             elif opcao == '2':
                 self.checkout()
             elif opcao == '3':
                 self.relatorios_menu()
             elif opcao == '4':
-                break
+                sys.exit()
             else:
                 print("Opção inválida. Tente novamente.")
 
@@ -92,7 +103,9 @@ class SistemaGestaoHotel:
         opcao = input("Escolha uma opção: ")
 
         if opcao == '1':
-            tipo = input("Tipo de quarto: ")
+            limpar()
+            print("- - - Cadastro de quarto - - -")
+            tipo = input("\nTipo de quarto: ")
             quantidade = int(input("Quantidade: "))
             self.gestao_quartos.adicionar_quartos(tipo, quantidade)
         elif opcao == '2':
@@ -100,7 +113,18 @@ class SistemaGestaoHotel:
             quantidade = int(input("Quantidade: "))
             self.gestao_auditorios.adicionar_auditorios(capacidade, quantidade)
         elif opcao == '3':
-            print("Funcionalidade de exclusão de quartos não implementada ainda.")
+            limpar()
+            if self.gestao_quartos.quartos:
+                self.relatorios.relatorio_quartos()
+                numero = int(input("\nNúmero do quarto a ser excluído: "))
+                if self.gestao_quartos.excluir_quarto(numero):
+                    print(f"\nQuarto {numero} excluído com sucesso.")
+                else:
+                    print(f"\nQuarto {numero} não encontrado.")
+                input("\nAperte Enter para retornar ao Menu Principal")
+            else:
+                print("Não há quartos cadastrados. Por favor, cadastre um quarto primeiro.")
+                input("\nAperte Enter para retornar ao Menu Principal")
         elif opcao == '4':
             print("Funcionalidade de exclusão de auditórios não implementada ainda.")
         elif opcao == '5':
