@@ -19,6 +19,13 @@ class GestaoAuditorios:
 
     def buscar_auditorios_disponiveis(self):
         return [auditorio for auditorio in self.auditorios if not auditorio.reservado]
+    
+    def excluir_auditorio(self, numero):
+            for auditorio in self.auditorios:
+                if auditorio.numero == numero:
+                    self.auditorios.remove(auditorio)
+                    return True
+            return False
 
 # Exemplo de uso:
 # gestao_auditorios = GestaoAuditorios()

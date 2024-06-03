@@ -31,4 +31,3 @@ class GestaoQuartos:
 # gestao_quartos = GestaoQuartos()
 # gestao_quartos.adicionar_quartos('casal', 5)
 # gestao_quartos.adicionar_quartos('compartilhado', 10)
-# print(gestao_quartos.excluir_quarto(3))  # True se o quarto foi excluído, False se não foi encontrado

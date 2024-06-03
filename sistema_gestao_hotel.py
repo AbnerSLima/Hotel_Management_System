@@ -43,7 +43,7 @@ class SistemaGestaoHotel:
         while True:
             limpar()
             print("- - - - MEMU - - - -")
-            print("1. Cadastro")
+            print("1. Cadastros")
             print("2. Checkin")
             print("3. Checkout")
             print("4. Relatórios")
@@ -108,10 +108,12 @@ class SistemaGestaoHotel:
             tipo = input("\nTipo de quarto: ")
             quantidade = int(input("Quantidade: "))
             self.gestao_quartos.adicionar_quartos(tipo, quantidade)
+
         elif opcao == '2':
             capacidade = int(input("Capacidade do auditório: "))
             quantidade = int(input("Quantidade: "))
             self.gestao_auditorios.adicionar_auditorios(capacidade, quantidade)
+
         elif opcao == '3':
             limpar()
             if self.gestao_quartos.quartos:
@@ -125,8 +127,21 @@ class SistemaGestaoHotel:
             else:
                 print("Não há quartos cadastrados. Por favor, cadastre um quarto primeiro.")
                 input("\nAperte Enter para retornar ao Menu Principal")
+
         elif opcao == '4':
-            print("Funcionalidade de exclusão de auditórios não implementada ainda.")
+            limpar()
+            if self.gestao_auditorios.auditorios:
+                self.relatorios.relatorio_auditorios()
+                numero = int(input("\nNúmero do auditório a ser excluído: "))
+                if self.gestao_auditorios.excluir_auditorio(numero):
+                    print(f"\nAuditório {numero} excluído com sucesso.")
+                else:
+                    print(f"\nAuditório {numero} não encontrado.")
+                input("\nAperte Enter para retornar ao Menu Principal")
+            else:
+                print("Não há auditórios cadastrados. Por favor, cadastre um auditório primeiro.")
+                input("\nAperte Enter para retornar ao Menu Principal")
+
         elif opcao == '5':
             limpar()
         else:
