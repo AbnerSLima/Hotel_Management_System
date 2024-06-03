@@ -176,7 +176,7 @@ class SistemaGestaoHotel:
                 print(f"Auditório {aud.numero}: Capacidade {aud.capacidade}")
             numero_auditorio = int(input("Número do auditório: "))
             valor_auditorio = float(input("Valor total do auditório: "))
-        self.gestao_estadias.cadastrar_estadia(nome_hospede, numero_quarto, camas, valor_camas, tipo_refeicao, valor_refeicao, numero_auditorio, valor_auditorio)
+        self.gestao_estadias.cadastrar_estadia(nome_hospede, numero_quarto, camas, valor_camas, tipo_refeicao, valor_refeicao, numero_auditorio, valor_auditorio)        
         input("\nAperte Enter para retornar ao Menu Principal")
 
     def checkout(self):
