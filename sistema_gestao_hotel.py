@@ -56,6 +56,7 @@ class SistemaGestaoHotel:
                 if self.gestao_quartos.quartos:
                     self.checkin()
                 else:
+                    limpar()
                     print("Não há quartos cadastrados. Por favor, cadastre um quarto primeiro.")
                     input("\nAperte Enter para retornar ao Menu Principal")
             elif opcao == '3':
@@ -125,6 +126,7 @@ class SistemaGestaoHotel:
                     print(f"\nQuarto {numero} não encontrado.")
                 input("\nAperte Enter para retornar ao Menu Principal")
             else:
+                limpar()
                 print("Não há quartos cadastrados. Por favor, cadastre um quarto primeiro.")
                 input("\nAperte Enter para retornar ao Menu Principal")
 
@@ -139,6 +141,7 @@ class SistemaGestaoHotel:
                     print(f"\nAuditório {numero} não encontrado.")
                 input("\nAperte Enter para retornar ao Menu Principal")
             else:
+                limpar()
                 print("Não há auditórios cadastrados. Por favor, cadastre um auditório primeiro.")
                 input("\nAperte Enter para retornar ao Menu Principal")
 
@@ -150,14 +153,15 @@ class SistemaGestaoHotel:
     def checkin(self):
         limpar()
         print("- - - - Checkin - - - - ")
-
         print("- - - Lista de quartos - - -")
         self.relatorios.relatorio_quartos()
         nome_hospede = input("\nNome do hospede: ")
+        limpar()
+        print(f"Nome do hospede: {nome_hospede}")
         quartos_disponiveis = self.gestao_quartos.buscar_quartos_disponiveis()
         for quarto in quartos_disponiveis:
             print(f"Quarto {quarto.numero}: {quarto.tipo}")
-        numero_quarto = int(input("Numero do quarto: "))
+        numero_quarto = int(input("\nNumero do quarto: "))
         camas = int(input("Quantidade de camas: "))
         valor_camas = float(input("Valor total das camas: "))
         refeicao = input("Deseja refeição durante a estadia? (s/n): ")
@@ -182,7 +186,9 @@ class SistemaGestaoHotel:
     def checkout(self):
         limpar()
         print("- - - - Checkout - - - -")
-        nome_hospede = input("Nome do hospede para checkout: ")
+        print("- - - Lista de quartos - - -")
+        self.relatorios.relatorio_quartos()
+        nome_hospede = input("\nNome do hospede para checkout: ")
         for estadia in self.gestao_estadias.estadias:
             if estadia.nome_hospede == nome_hospede and estadia.quarto.reservado:
                 estadia.quarto.reservado = False
